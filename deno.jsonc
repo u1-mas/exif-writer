@@ -1,0 +1,24 @@
+{
+  "imports": {
+    "@ayonli/jsext": "jsr:@ayonli/jsext@^0.9.30",
+    "@deno-lib/logger": "jsr:@deno-lib/logger@^1.1.6",
+    "@std/fs": "jsr:@std/fs@^0.229.2",
+    "cache": "https://deno.land/x/cache@0.2.13/mod.ts",
+    "preact": "https://esm.sh/v135/preact@10.22.0",
+    "preact/": "https://esm.sh/v135/preact@10.22.0/",
+    "systray": "https://deno.land/x/systray@v0.3.0/mod.ts",
+    "webui": "https://deno.land/x/webui@2.4.4/mod.ts"
+  },
+  "tasks": {
+    "dev": "deno task build-html && deno run --watch -A --unstable-ffi src/entrypoint.ts",
+    "compile": "deno task build-html && deno compile --target x86_64-pc-windows-msvc -A --unstable-ffi --output bin/exif-writer.exe --no-terminal src/entrypoint.ts",
+    "watch-html": "deno run -A npm:vite build --watch",
+    "build-html": "deno run -A npm:vite build",
+    "preview": "deno run -A npm:vite preview"
+  },
+  "lock": false,
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "preact"
+  }
+}
