@@ -11,7 +11,7 @@
   },
   "tasks": {
     "dev": "deno task build-html && deno run --watch -A --unstable-ffi src/entrypoint.ts",
-    "compile": "deno task build-html && deno compile --target x86_64-pc-windows-msvc -A --unstable-ffi --output bin/exif-writer.exe --no-terminal src/entrypoint.ts",
+    "compile": "deno task build-html && deno compile --target x86_64-pc-windows-msvc -A --unstable-ffi --output build/exif-writer.exe --no-terminal src/entrypoint.ts",
     "watch-html": "deno run -A npm:vite build --watch",
     "build-html": "deno run -A npm:vite build",
     "preview": "deno run -A npm:vite preview"
