@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Check out repository
@@ -23,42 +23,24 @@ jobs:
       - name: Run Deno Task Compile
         run: deno task compile
 
-      - name: Archive built files
-        uses: actions/upload-artifact@v2
-        with:
-          name: built-files
-          path: ./build # Specify the path to the compiled files or directory
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download built files
-        uses: actions/download-artifact@v2
-        with:
-          name: built-files
-
-      - name: Create Release
+      - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ inputs.release_number }} # Specify the tag name for the release
-          release_name: Release v${{ inputs.release_number }} # Specify the release name
-          body: |
-            Release notes for v{{ inputs.release_number }}
+          tag_name: v${{ inputs.release_number }}  # Change this to your desired tag name
+          release_name: Release v${{ inputs.release_number }}  # Change this to your desired release name
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      - name: Upload release asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./built-files # Specify the path to the compiled files or directory
-          asset_name: compiled-files.zip # Specify the name for the uploaded asset
-          asset_content_type: application/zip # Specify the content type of the uploaded asset
+          asset_path: ./build/exif-writer.exe
+          asset_name: exif-writer.exe
+          asset_content_type: application/octet-stream 
