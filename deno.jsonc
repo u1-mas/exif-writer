@@ -16,9 +16,9 @@
     "build-html": "deno run -A npm:vite build",
     "preview": "deno run -A npm:vite preview"
   },
-  "lock": false,
   "compilerOptions": {
     "jsx": "precompile",
     "jsxImportSource": "preact"
-  }
+  },
+  "nodeModulesDir": true
 }
